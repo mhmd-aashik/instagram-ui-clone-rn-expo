@@ -1,5 +1,12 @@
+import { StoryItem } from "@/components/stories/StoryItem";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
@@ -18,6 +25,22 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
       </View>
+
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.stories}
+      >
+        <StoryItem name="Your story" image="https://i.pravatar.cc/150?img=11" />
+
+        <StoryItem name="sarah" image="https://i.pravatar.cc/150?img=32" />
+
+        <StoryItem name="john" image="https://i.pravatar.cc/150?img=12" />
+
+        <StoryItem name="alex" image="https://i.pravatar.cc/150?img=5" />
+
+        <StoryItem name="emma" image="https://i.pravatar.cc/150?img=25" />
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -45,5 +68,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
+  },
+
+  stories: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
 });
