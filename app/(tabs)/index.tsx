@@ -1,3 +1,4 @@
+import { PostCard } from "@/components/feed/PostCard";
 import { StoryItem } from "@/components/stories/StoryItem";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -12,34 +13,46 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.logo}>Instagram</Text>
-
-        <View style={styles.actions}>
-          <TouchableOpacity>
-            <Ionicons name="heart-outline" size={27} color="#000" />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Ionicons name="paper-plane-outline" size={26} color="#000" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
       <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.stories}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.feed}
       >
-        <StoryItem name="Your story" image="https://i.pravatar.cc/150?img=11" />
+        <View style={styles.header}>
+          <Text style={styles.logo}>Instagram</Text>
 
-        <StoryItem name="sarah" image="https://i.pravatar.cc/150?img=32" />
+          <View style={styles.actions}>
+            <TouchableOpacity>
+              <Ionicons name="heart-outline" size={27} color="#000" />
+            </TouchableOpacity>
 
-        <StoryItem name="john" image="https://i.pravatar.cc/150?img=12" />
+            <TouchableOpacity>
+              <Ionicons name="paper-plane-outline" size={26} color="#000" />
+            </TouchableOpacity>
+          </View>
+        </View>
 
-        <StoryItem name="alex" image="https://i.pravatar.cc/150?img=5" />
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.stories}
+        >
+          <StoryItem
+            name="Your story"
+            image="https://i.pravatar.cc/150?img=11"
+          />
 
-        <StoryItem name="emma" image="https://i.pravatar.cc/150?img=25" />
+          <StoryItem name="sarah" image="https://i.pravatar.cc/150?img=32" />
+
+          <StoryItem name="john" image="https://i.pravatar.cc/150?img=12" />
+
+          <StoryItem name="alex" image="https://i.pravatar.cc/150?img=5" />
+
+          <StoryItem name="emma" image="https://i.pravatar.cc/150?img=25" />
+        </ScrollView>
+
+        <PostCard />
+        <PostCard />
+        <PostCard />
       </ScrollView>
     </SafeAreaView>
   );
@@ -73,5 +86,9 @@ const styles = StyleSheet.create({
   stories: {
     paddingHorizontal: 10,
     paddingVertical: 10,
+  },
+
+  feed: {
+    paddingBottom: 20,
   },
 });
