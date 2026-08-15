@@ -138,6 +138,7 @@ export function PostCard({
         </TouchableOpacity>
         <Text style={styles.time}>{time}</Text>
       </View>
+      <View style={styles.divider} />
     </View>
   );
 }
@@ -236,5 +237,10 @@ const styles = StyleSheet.create({
     right: 0,
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  divider: {
+    height: 1,
+    backgroundColor: "#efefef",
   },
 });
