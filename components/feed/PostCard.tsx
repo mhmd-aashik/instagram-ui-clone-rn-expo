@@ -1,12 +1,23 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export function PostCard() {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
+  const lastTap = useRef<number | null>(null);
   const baseLikes = 2481;
   const likeCount = liked ? baseLikes + 1 : baseLikes;
+
+  const handleDoubleTap = () => {
+    const now = Date.now();
+
+    if (lastTap.current && now - lastTap.current < 300) {
+      setLiked(true);
+    }
+
+    lastTap.current = now;
+  };
 
   return (
     <View style={styles.container}>
@@ -28,12 +39,14 @@ export function PostCard() {
         </TouchableOpacity>
       </View>
 
-      <Image
-        source={{
-          uri: "https://picsum.photos/800/800",
-        }}
-        style={styles.postImage}
-      />
+      <TouchableOpacity activeOpacity={1} onPress={handleDoubleTap}>
+        <Image
+          source={{
+            uri: "https://picsum.photos/800/800",
+          }}
+          style={styles.postImage}
+        />
+      </TouchableOpacity>
 
       <View style={styles.actionsRow}>
         <View style={styles.leftActions}>
