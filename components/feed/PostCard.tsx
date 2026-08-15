@@ -48,6 +48,20 @@ export function PostCard() {
           <Ionicons name="bookmark-outline" size={26} color="#000" />
         </TouchableOpacity>
       </View>
+      <View style={styles.content}>
+        <Text style={styles.likes}>2,481 likes</Text>
+
+        <Text style={styles.caption}>
+          <Text style={styles.username}>john.dev </Text>
+          Building something cool with Expo 🚀
+        </Text>
+
+        <TouchableOpacity>
+          <Text style={styles.comments}>View all 124 comments</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.time}>2 hours ago</Text>
+      </View>
     </View>
   );
 }
@@ -104,5 +118,33 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 16,
+  },
+
+  content: {
+    paddingHorizontal: 12,
+    paddingBottom: 14,
+  },
+
+  likes: {
+    fontSize: 14,
+    fontWeight: "600",
+    marginBottom: 6,
+  },
+
+  caption: {
+    fontSize: 14,
+    lineHeight: 20,
+  },
+
+  comments: {
+    fontSize: 14,
+    color: "#737373",
+    marginTop: 6,
+  },
+
+  time: {
+    fontSize: 11,
+    color: "#737373",
+    marginTop: 6,
   },
 });
