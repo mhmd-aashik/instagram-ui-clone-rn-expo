@@ -9,13 +9,33 @@ import {
   View,
 } from "react-native";
 
-export function PostCard() {
+type PostCardProps = {
+  username: string;
+  location?: string;
+  avatar: string;
+  image: string;
+  caption: string;
+  likes: number;
+  comments: number;
+  time: string;
+};
+
+export function PostCard({
+  username,
+  location,
+  avatar,
+  image,
+  caption,
+  likes,
+  comments,
+  time,
+}: PostCardProps) {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
   const lastTap = useRef<number | null>(null);
   const heartScale = useRef(new Animated.Value(0)).current;
 
-  const baseLikes = 2481;
+  const baseLikes = likes;
   const likeCount = liked ? baseLikes + 1 : baseLikes;
 
   const handleDoubleTap = () => {
@@ -49,14 +69,11 @@ export function PostCard() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.user}>
-          <Image
-            source={{ uri: "https://i.pravatar.cc/150?img=12" }}
-            style={styles.avatar}
-          />
+          <Image source={{ uri: avatar }} style={styles.avatar} />
 
           <View>
-            <Text style={styles.username}>john.dev</Text>
-            <Text style={styles.location}>Dubai, UAE</Text>
+            <Text style={styles.username}>{username}</Text>
+            {location && <Text style={styles.location}>{location}</Text>}
           </View>
         </View>
 
@@ -67,12 +84,7 @@ export function PostCard() {
 
       <TouchableOpacity activeOpacity={1} onPress={handleDoubleTap}>
         <View style={styles.imageContainer}>
-          <Image
-            source={{
-              uri: "https://picsum.photos/800/800",
-            }}
-            style={styles.postImage}
-          />
+          <Image source={{ uri: image }} style={styles.postImage} />
 
           <Animated.View
             pointerEvents="none"
@@ -118,15 +130,13 @@ export function PostCard() {
       <View style={styles.content}>
         <Text style={styles.likes}>{likeCount.toLocaleString()} likes</Text>
         <Text style={styles.caption}>
-          <Text style={styles.username}>john.dev </Text>
-          Building something cool with Expo 🚀
+          <Text style={styles.username}>{username} </Text>
+          {caption}
         </Text>
-
         <TouchableOpacity>
-          <Text style={styles.comments}>View all 124 comments</Text>
+          <Text style={styles.comments}>View all {comments} comments</Text>
         </TouchableOpacity>
-
-        <Text style={styles.time}>2 hours ago</Text>
+        <Text style={styles.time}>{time}</Text>
       </View>
     </View>
   );

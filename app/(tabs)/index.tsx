@@ -50,9 +50,36 @@ export default function HomeScreen() {
           <StoryItem name="emma" image="https://i.pravatar.cc/150?img=25" />
         </ScrollView>
 
-        <PostCard />
-        <PostCard />
-        <PostCard />
+        <PostCard
+          username="john.dev"
+          location="Dubai, UAE"
+          avatar="https://i.pravatar.cc/150?img=12"
+          image="https://picsum.photos/800/800"
+          caption="Building something cool with Expo 🚀"
+          likes={2481}
+          comments={124}
+          time="2 hours ago"
+        />
+        <PostCard
+          username="john.dev"
+          location="Dubai, UAE"
+          avatar="https://i.pravatar.cc/150?img=12"
+          image="https://picsum.photos/800/800"
+          caption="Building something cool with Expo 🚀"
+          likes={2481}
+          comments={124}
+          time="2 hours ago"
+        />
+        <PostCard
+          username="john.dev"
+          location="Dubai, UAE"
+          avatar="https://i.pravatar.cc/150?img=12"
+          image="https://picsum.photos/800/800"
+          caption="Building something cool with Expo 🚀"
+          likes={2481}
+          comments={124}
+          time="2 hours ago"
+        />
       </ScrollView>
     </SafeAreaView>
   );
