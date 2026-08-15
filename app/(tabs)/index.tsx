@@ -62,6 +62,7 @@ export default function HomeScreen() {
             likes={post.likes}
             comments={post.comments}
             time={post.time}
+            verified={post.verified}
           />
         ))}
       </ScrollView>

@@ -9,6 +9,7 @@ export const posts = [
     likes: 2481,
     comments: 124,
     time: "2 hours ago",
+    verified: true,
   },
   {
     id: "2",
@@ -20,6 +21,7 @@ export const posts = [
     likes: 1832,
     comments: 89,
     time: "4 hours ago",
+    verified: true,
   },
   {
     id: "3",

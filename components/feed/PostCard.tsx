@@ -18,6 +18,7 @@ type PostCardProps = {
   likes: number;
   comments: number;
   time: string;
+  verified?: boolean;
 };
 
 export function PostCard({
@@ -29,6 +30,7 @@ export function PostCard({
   likes,
   comments,
   time,
+  verified = false,
 }: PostCardProps) {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -72,7 +74,13 @@ export function PostCard({
           <Image source={{ uri: avatar }} style={styles.avatar} />
 
           <View>
-            <Text style={styles.username}>{username}</Text>
+            <View style={styles.usernameRow}>
+              <Text style={styles.username}>{username}</Text>
+
+              {verified && (
+                <Ionicons name="checkmark-circle" size={14} color="#0095F6" />
+              )}
+            </View>{" "}
             {location && <Text style={styles.location}>{location}</Text>}
           </View>
         </View>
@@ -242,5 +250,11 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: "#efefef",
+  },
+
+  usernameRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
   },
 });
