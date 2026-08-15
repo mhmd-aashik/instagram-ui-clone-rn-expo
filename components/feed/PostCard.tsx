@@ -5,6 +5,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 export function PostCard() {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
+  const baseLikes = 2481;
+  const likeCount = liked ? baseLikes + 1 : baseLikes;
 
   return (
     <View style={styles.container}>
@@ -61,8 +63,7 @@ export function PostCard() {
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
-        <Text style={styles.likes}>2,481 likes</Text>
-
+        <Text style={styles.likes}>{likeCount.toLocaleString()} likes</Text>
         <Text style={styles.caption}>
           <Text style={styles.username}>john.dev </Text>
           Building something cool with Expo 🚀
