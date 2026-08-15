@@ -28,6 +28,26 @@ export function PostCard() {
         }}
         style={styles.postImage}
       />
+
+      <View style={styles.actionsRow}>
+        <View style={styles.leftActions}>
+          <TouchableOpacity>
+            <Ionicons name="heart-outline" size={28} color="#000" />
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Ionicons name="chatbubble-outline" size={26} color="#000" />
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Ionicons name="paper-plane-outline" size={26} color="#000" />
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity>
+          <Ionicons name="bookmark-outline" size={26} color="#000" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -70,5 +90,19 @@ const styles = StyleSheet.create({
   postImage: {
     width: "100%",
     aspectRatio: 1,
+  },
+
+  actionsRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+
+  leftActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
   },
 });
