@@ -1,11 +1,20 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export function PostCard() {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
   const lastTap = useRef<number | null>(null);
+  const heartScale = useRef(new Animated.Value(0)).current;
+
   const baseLikes = 2481;
   const likeCount = liked ? baseLikes + 1 : baseLikes;
 
@@ -14,6 +23,23 @@ export function PostCard() {
 
     if (lastTap.current && now - lastTap.current < 300) {
       setLiked(true);
+
+      heartScale.setValue(0);
+
+      Animated.sequence([
+        Animated.spring(heartScale, {
+          toValue: 1,
+          useNativeDriver: true,
+        }),
+
+        Animated.delay(400),
+
+        Animated.timing(heartScale, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+      ]).start();
     }
 
     lastTap.current = now;
@@ -40,12 +66,26 @@ export function PostCard() {
       </View>
 
       <TouchableOpacity activeOpacity={1} onPress={handleDoubleTap}>
-        <Image
-          source={{
-            uri: "https://picsum.photos/800/800",
-          }}
-          style={styles.postImage}
-        />
+        <View style={styles.imageContainer}>
+          <Image
+            source={{
+              uri: "https://picsum.photos/800/800",
+            }}
+            style={styles.postImage}
+          />
+
+          <Animated.View
+            pointerEvents="none"
+            style={[
+              styles.bigHeart,
+              {
+                transform: [{ scale: heartScale }],
+              },
+            ]}
+          >
+            <Ionicons name="heart" size={100} color="#ed4956" />
+          </Animated.View>
+        </View>
       </TouchableOpacity>
 
       <View style={styles.actionsRow}>
@@ -172,5 +212,19 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: "#737373",
     marginTop: 6,
+  },
+
+  imageContainer: {
+    position: "relative",
+  },
+
+  bigHeart: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
