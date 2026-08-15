@@ -1,5 +1,6 @@
 import { PostCard } from "@/components/feed/PostCard";
 import { StoryItem } from "@/components/stories/StoryItem";
+import { posts } from "@/data/posts";
 import { Ionicons } from "@expo/vector-icons";
 import {
   ScrollView,
@@ -50,36 +51,19 @@ export default function HomeScreen() {
           <StoryItem name="emma" image="https://i.pravatar.cc/150?img=25" />
         </ScrollView>
 
-        <PostCard
-          username="john.dev"
-          location="Dubai, UAE"
-          avatar="https://i.pravatar.cc/150?img=12"
-          image="https://picsum.photos/800/800"
-          caption="Building something cool with Expo 🚀"
-          likes={2481}
-          comments={124}
-          time="2 hours ago"
-        />
-        <PostCard
-          username="john.dev"
-          location="Dubai, UAE"
-          avatar="https://i.pravatar.cc/150?img=12"
-          image="https://picsum.photos/800/800"
-          caption="Building something cool with Expo 🚀"
-          likes={2481}
-          comments={124}
-          time="2 hours ago"
-        />
-        <PostCard
-          username="john.dev"
-          location="Dubai, UAE"
-          avatar="https://i.pravatar.cc/150?img=12"
-          image="https://picsum.photos/800/800"
-          caption="Building something cool with Expo 🚀"
-          likes={2481}
-          comments={124}
-          time="2 hours ago"
-        />
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            username={post.username}
+            location={post.location}
+            avatar={post.avatar}
+            image={post.image}
+            caption={post.caption}
+            likes={post.likes}
+            comments={post.comments}
+            time={post.time}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
