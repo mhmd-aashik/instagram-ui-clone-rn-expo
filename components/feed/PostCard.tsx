@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import {
   Animated,
   Image,
+  Modal,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -35,6 +36,8 @@ export function PostCard({
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
   const lastTap = useRef<number | null>(null);
+  const [optionsOpen, setOptionsOpen] = useState(false);
+
   const heartScale = useRef(new Animated.Value(0)).current;
 
   const baseLikes = likes;
@@ -80,12 +83,12 @@ export function PostCard({
               {verified && (
                 <Ionicons name="checkmark-circle" size={14} color="#0095F6" />
               )}
-            </View>{" "}
+            </View>
             {location && <Text style={styles.location}>{location}</Text>}
           </View>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setOptionsOpen(true)}>
           <Ionicons name="ellipsis-horizontal" size={22} color="#000" />
         </TouchableOpacity>
       </View>
@@ -147,6 +150,40 @@ export function PostCard({
         <Text style={styles.time}>{time}</Text>
       </View>
       <View style={styles.divider} />
+
+      <Modal
+        visible={optionsOpen}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setOptionsOpen(false)}
+      >
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setOptionsOpen(false)}
+        >
+          <View style={styles.optionsMenu}>
+            <TouchableOpacity style={styles.optionItem}>
+              <Text style={styles.optionText}>Save</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.optionItem}>
+              <Text style={styles.optionText}>Share</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.optionItem}>
+              <Text style={[styles.optionText, styles.reportText]}>Report</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.optionItem}
+              onPress={() => setOptionsOpen(false)}
+            >
+              <Text style={styles.optionText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 }
@@ -256,5 +293,34 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
+  },
+
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.35)",
+    justifyContent: "flex-end",
+  },
+
+  optionsMenu: {
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingBottom: 20,
+  },
+
+  optionItem: {
+    paddingVertical: 18,
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#efefef",
+  },
+
+  optionText: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+
+  reportText: {
+    color: "#ed4956",
   },
 });
