@@ -4,6 +4,7 @@ import {
   Animated,
   Image,
   Modal,
+  Share,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -70,6 +71,16 @@ export function PostCard({
     lastTap.current = now;
   };
 
+  const handleShare = async () => {
+    try {
+      await Share.share({
+        message: `${username}: ${caption}`,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -125,7 +136,7 @@ export function PostCard({
             <Ionicons name="chatbubble-outline" size={26} color="#000" />
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleShare}>
             <Ionicons name="paper-plane-outline" size={26} color="#000" />
           </TouchableOpacity>
         </View>
@@ -167,7 +178,13 @@ export function PostCard({
               <Text style={styles.optionText}>Save</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.optionItem}>
+            <TouchableOpacity
+              style={styles.optionItem}
+              onPress={() => {
+                setOptionsOpen(false);
+                handleShare();
+              }}
+            >
               <Text style={styles.optionText}>Share</Text>
             </TouchableOpacity>
 
