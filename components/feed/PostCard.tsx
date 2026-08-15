@@ -1,7 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export function PostCard() {
+  const [liked, setLiked] = useState(false);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -31,8 +34,12 @@ export function PostCard() {
 
       <View style={styles.actionsRow}>
         <View style={styles.leftActions}>
-          <TouchableOpacity>
-            <Ionicons name="heart-outline" size={28} color="#000" />
+          <TouchableOpacity onPress={() => setLiked(!liked)}>
+            <Ionicons
+              name={liked ? "heart" : "heart-outline"}
+              size={28}
+              color={liked ? "#ed4956" : "#000"}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity>
