@@ -4,6 +4,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export function PostCard() {
   const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -51,8 +52,12 @@ export function PostCard() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity>
-          <Ionicons name="bookmark-outline" size={26} color="#000" />
+        <TouchableOpacity onPress={() => setSaved(!saved)}>
+          <Ionicons
+            name={saved ? "bookmark" : "bookmark-outline"}
+            size={26}
+            color="#000"
+          />
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
